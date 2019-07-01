@@ -1,0 +1,11 @@
+{
+    "name": "luke/shooping-basket",
+    "type": "project",
+    "authors": [
+        {
+            "name": "Luke Roberts",
+            "email": "luke@mewt.eu"
+        }
+    ],
+    "require": {}
+}
