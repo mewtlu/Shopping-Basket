@@ -68,9 +68,9 @@ final class BasketTest extends TestCase
     public function testAddProductSuccess(): void
     {
         $bExpectedProductAdded = true;
-        $strWrongProductCode = 'R01';
+        $strProductCode = 'R01';
 
-        $bReceivedProductAdded = $this->basket->addProduct($strWrongProductCode);
+        $bReceivedProductAdded = $this->basket->addProduct($strProductCode);
         $this->assertEquals($bExpectedProductAdded, $bReceivedProductAdded);
     }
 
