@@ -72,6 +72,7 @@ final class BasketTest extends TestCase
 
         $bReceivedProductAdded = $this->basket->addProduct($strProductCode);
         $this->assertEquals($bExpectedProductAdded, $bReceivedProductAdded);
+        $this->assertContains($strProductCode, $this->basket->_basket);
     }
 
     public function testAddProductError(): void
