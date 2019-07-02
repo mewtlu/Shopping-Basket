@@ -43,5 +43,25 @@ final class BasketTest extends TestCase
         ];
         $this->basket = new Basket($this->arrProducts, $this->arrDeliveryRules, $this->arrOffers);
     }
+
+    public function testInitialized(): void
+    {
+        $this->assertInstanceOf(
+            Basket::class,
+            $this->basket
+        );
+        $this->assertEquals(
+            $this->arrProducts,
+            $this->basket->arrProducts
+        );
+        $this->assertEquals(
+            $this->arrDeliveryRules,
+            $this->basket->arrDeliveryRules
+        );
+        $this->assertEquals(
+            $this->arrOffers,
+            $this->basket->arrOffers
+        );
+    }
 }
 
