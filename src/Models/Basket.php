@@ -8,5 +8,7 @@ class Basket
         $this->arrProducts = $arrProducts;
         $this->arrDeliveryRules = $arrDeliveryRules;
         $this->arrOffers = $arrOffers;
+
+        $this->_basket = []; // public for sake of UTs
     }
 }
