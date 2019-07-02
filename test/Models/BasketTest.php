@@ -1,6 +1,7 @@
 <?php
 namespace App\Models;
 
+use App\Exceptions\Missing_Product_Exception;
 use PHPUnit\Framework\TestCase;
 
 final class BasketTest extends TestCase
@@ -62,6 +63,23 @@ final class BasketTest extends TestCase
             $this->arrOffers,
             $this->basket->arrOffers
         );
+    }
+
+    public function testAddProductSuccess(): void
+    {
+        $bExpectedProductAdded = true;
+        $strWrongProductCode = 'R01';
+
+        $bReceivedProductAdded = $this->basket->addProduct($strWrongProductCode);
+        $this->assertEquals($bExpectedProductAdded, $bReceivedProductAdded);
+    }
+
+    public function testAddProductError(): void
+    {
+        $strWrongProductCode = 'P01';
+
+        $this->expectException(Missing_Product_Exception::class);
+        $this->basket->addProduct($strWrongProductCode);
     }
 }
 
