@@ -18,5 +18,6 @@
     },
     "scripts": {
         "test": "./vendor/bin/phpunit",
+        "classmaps": "composer dump-autoload -o"
     }
 }
