@@ -39,7 +39,7 @@ final class BasketTest extends TestCase
             [
                 "product" => "R01",
                 "threshold" => "2",
-                "discount" => "25%",
+                "discount" => "50%",
             ]
         ];
         $this->basket = new Basket($this->arrProducts, $this->arrDeliveryRules, $this->arrOffers);
@@ -81,6 +81,45 @@ final class BasketTest extends TestCase
 
         $this->expectException(Missing_Product_Exception::class);
         $this->basket->addProduct($strWrongProductCode);
+    }
+
+    public function testGetTotal_first(): void
+    {
+        $expectedBasketTotal = 9827;
+        $arrBasketItems = ['B01', 'B01', 'R01', 'R01', 'R01'];
+
+        foreach($arrBasketItems as $strItem) {
+            $this->basket->addProduct($strItem);
+        }
+
+        $receivedBasketTotal = $this->basket->getTotal();
+        $this->assertEquals($expectedBasketTotal, $receivedBasketTotal);
+    }
+
+    public function testGetTotal_second(): void
+    {
+        $expectedBasketTotal = 6085;
+        $arrBasketItems = ['R01', 'G01'];
+
+        foreach($arrBasketItems as $strItem) {
+            $this->basket->addProduct($strItem);
+        }
+
+        $receivedBasketTotal = $this->basket->getTotal();
+        $this->assertEquals($expectedBasketTotal, $receivedBasketTotal);
+    }
+
+    public function testGetTotal_third(): void
+    {
+        $expectedBasketTotal = 5437;
+        $arrBasketItems = ['R01', 'R01'];
+
+        foreach($arrBasketItems as $strItem) {
+            $this->basket->addProduct($strItem);
+        }
+
+        $receivedBasketTotal = $this->basket->getTotal();
+        $this->assertEquals($expectedBasketTotal, $receivedBasketTotal);
     }
 }
 
