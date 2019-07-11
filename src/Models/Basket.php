@@ -14,6 +14,15 @@ class Basket
         $this->_basket = []; // public for sake of UTs
     }
 
+    public function getDeliveryRules()
+    {
+        return $this->arrDeliveryRules;
+    }
+    public function setDeliveryRules($arrDeliveryRules)
+    {
+        return $this->arrDeliveryRules = $arrDeliveryRules;
+    }
+
     public function addProduct($strProductCode): bool
     {
         if (!array_key_exists($strProductCode, $this->arrProducts)) {
