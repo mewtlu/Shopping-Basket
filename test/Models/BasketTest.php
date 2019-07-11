@@ -2,6 +2,7 @@
 namespace App\Models;
 
 use App\Exceptions\Missing_Product_Exception;
+use App\Exceptions\Unrecognized_Operator_Exception;
 use PHPUnit\Framework\TestCase;
 
 final class BasketTest extends TestCase
@@ -118,6 +119,29 @@ final class BasketTest extends TestCase
             $this->basket->addProduct($strItem);
         }
 
+        $receivedBasketTotal = $this->basket->getTotal();
+        $this->assertEquals($expectedBasketTotal, $receivedBasketTotal);
+    }
+
+    public function testGetTotal_IncorrectOperator(): void
+    {
+        $expectedBasketTotal = 5437;
+        $arrBasketItems = ['R01', 'R01'];
+        $arrBrokenDeliveryRule = [
+            "operator" => "?",
+            "threshold" => "1000",
+            "price" => "500",
+        ];
+
+        $arrDeliveryRules = $this->basket->getDeliveryRules();
+        array_unshift($arrDeliveryRules, $arrBrokenDeliveryRule);
+        $this->basket->setDeliveryRules($arrDeliveryRules);
+
+        foreach($arrBasketItems as $strItem) {
+            $this->basket->addProduct($strItem);
+        }
+
+        $this->expectException(Unrecognized_Operator_Exception::class);
         $receivedBasketTotal = $this->basket->getTotal();
         $this->assertEquals($expectedBasketTotal, $receivedBasketTotal);
     }
