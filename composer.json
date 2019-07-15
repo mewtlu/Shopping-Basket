@@ -1,6 +1,6 @@
 {
     "name": "luke/shooping-basket",
-    "type": "project",
+    "type": "library",
     "authors": [
         {
             "name": "Luke Roberts",
